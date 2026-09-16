@@ -1,0 +1,16 @@
+% Generado por src/part1_generators.py.
+% No editar a mano: se sobrescribe en cada ejecucion.
+\begin{table}[htbp]\centering
+\caption{MT19937 propio frente a \texttt{random} y \texttt{secrets} ($N=\NMuestra$).}
+\label{tab:librerias}
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+Fuente & Valores/s & $X^2$ & $p_{\chi^2}$ & $D$ & $p_{KS}$ \\
+\midrule
+\texttt{MT19937 propio} & 459{,}593 & 11.71 & 0.2300 & 0.00381 & 0.1092 \\
+\texttt{random} & 15{,}382{,}116 & 11.71 & 0.2300 & 0.00381 & 0.1092 \\
+\texttt{secrets} & 1{,}174{,}510 & 9.34 & 0.4066 & 0.00205 & 0.7965 \\
+\bottomrule
+\end{tabular}
+\end{table}

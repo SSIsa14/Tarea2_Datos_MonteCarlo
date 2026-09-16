@@ -1,0 +1,17 @@
+% Generado por src/part1_generators.py.
+% No editar a mano: se sobrescribe en cada ejecucion.
+\begin{table}[htbp]\centering
+\caption{Pruebas de hipotesis para Cuadrados medios sobre $N=\NMuestra$ valores. Se rechaza $H_0$ al $5\%$ si $p<0.05$.}
+\label{tab:pruebasCM}
+\small
+\begin{tabular}{llrrl}
+\toprule
+Prueba & Mide & Estadistico & $p$-valor & Decision \\
+\midrule
+$\chi^2$ ($k=10$) & uniformidad & 748369.88 & $<10^{-12}$ & rechaza $H_0$ \\
+Kolmogorov--Smirnov & uniformidad & 0.91138 & $<10^{-12}$ & rechaza $H_0$ \\
+Autocorrelacion lag-1 & independencia & +0.73241 & $<10^{-12}$ & rechaza $H_0$ \\
+Rachas & independencia & 0 & $<10^{-12}$ & rechaza $H_0$ \\
+\bottomrule
+\end{tabular}
+\end{table}

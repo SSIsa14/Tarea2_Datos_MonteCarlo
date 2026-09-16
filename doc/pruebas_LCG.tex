@@ -1,0 +1,17 @@
+% Generado por src/part1_generators.py.
+% No editar a mano: se sobrescribe en cada ejecucion.
+\begin{table}[htbp]\centering
+\caption{Pruebas de hipotesis para LCG sobre $N=\NMuestra$ valores. Se rechaza $H_0$ al $5\%$ si $p<0.05$.}
+\label{tab:pruebasLCG}
+\small
+\begin{tabular}{llrrl}
+\toprule
+Prueba & Mide & Estadistico & $p$-valor & Decision \\
+\midrule
+$\chi^2$ ($k=10$) & uniformidad & 6.17 & 0.7223 & no rechaza $H_0$ \\
+Kolmogorov--Smirnov & uniformidad & 0.00312 & 0.2830 & no rechaza $H_0$ \\
+Autocorrelacion lag-1 & independencia & +0.00119 & 0.7075 & no rechaza $H_0$ \\
+Rachas & independencia & 49849 & 0.3364 & no rechaza $H_0$ \\
+\bottomrule
+\end{tabular}
+\end{table}

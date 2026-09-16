@@ -1,0 +1,17 @@
+% Generado por src/part1_generators.py.
+% No editar a mano: se sobrescribe en cada ejecucion.
+\begin{table}[htbp]\centering
+\caption{Pruebas de hipotesis para RANDU sobre $N=\NMuestra$ valores. Se rechaza $H_0$ al $5\%$ si $p<0.05$.}
+\label{tab:pruebasRANDU}
+\small
+\begin{tabular}{llrrl}
+\toprule
+Prueba & Mide & Estadistico & $p$-valor & Decision \\
+\midrule
+$\chi^2$ ($k=10$) & uniformidad & 8.80 & 0.4561 & no rechaza $H_0$ \\
+Kolmogorov--Smirnov & uniformidad & 0.00220 & 0.7185 & no rechaza $H_0$ \\
+Autocorrelacion lag-1 & independencia & -0.00024 & 0.9390 & no rechaza $H_0$ \\
+Rachas & independencia & 50136 & 0.3932 & no rechaza $H_0$ \\
+\bottomrule
+\end{tabular}
+\end{table}

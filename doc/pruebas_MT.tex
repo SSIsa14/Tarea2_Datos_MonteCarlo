@@ -1,0 +1,17 @@
+% Generado por src/part1_generators.py.
+% No editar a mano: se sobrescribe en cada ejecucion.
+\begin{table}[htbp]\centering
+\caption{Pruebas de hipotesis para Mersenne Twister sobre $N=\NMuestra$ valores. Se rechaza $H_0$ al $5\%$ si $p<0.05$.}
+\label{tab:pruebasMT}
+\small
+\begin{tabular}{llrrl}
+\toprule
+Prueba & Mide & Estadistico & $p$-valor & Decision \\
+\midrule
+$\chi^2$ ($k=10$) & uniformidad & 6.51 & 0.6879 & no rechaza $H_0$ \\
+Kolmogorov--Smirnov & uniformidad & 0.00303 & 0.3175 & no rechaza $H_0$ \\
+Autocorrelacion lag-1 & independencia & +0.00245 & 0.4393 & no rechaza $H_0$ \\
+Rachas & independencia & 49904 & 0.5396 & no rechaza $H_0$ \\
+\bottomrule
+\end{tabular}
+\end{table}

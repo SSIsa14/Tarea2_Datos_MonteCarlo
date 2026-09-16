@@ -1,0 +1,21 @@
+% Generado por los scripts de src/.
+% No editar a mano: se sobrescribe en cada ejecucion.
+\begin{table}[htbp]\centering
+\caption{Reduccion de varianza con $N=\NVar$ evaluaciones de $f$ por estimador, sobre la integral (a) del seno y la (b) de la densidad normal. El factor compara la varianza del estimador contra Monte Carlo simple, y el speedup efectivo es el numero de muestras simples que harian falta para igualar esa precision.}
+\label{tab:varianza}
+\footnotesize
+\begin{tabular}{llrlrrr}
+\toprule
+Integral & Tecnica & Estimacion & IC $95\%$ & Varianza & Factor & Speedup \\
+\midrule
+(a) & simple & $0.636179$ & $[0.634830,\ 0.637528]$ & $4.74\times 10^{-7}$ & 1.00x & $2.0\times 10^{5}$ \\
+ & antiteticas & $0.635877$ & $[0.633970,\ 0.637785]$ & $9.47\times 10^{-7}$ & 0.50x & $1.0\times 10^{5}$ \\
+ & control & $0.636603$ & $[0.636527,\ 0.636678]$ & $1.49\times 10^{-9}$ & 318.55x & $6.4\times 10^{7}$ \\
+\addlinespace
+(b) & simple & $0.477290$ & $[0.476280,\ 0.478299]$ & $2.65\times 10^{-7}$ & 1.00x & $2.0\times 10^{5}$ \\
+ & antiteticas & $0.477234$ & $[0.477181,\ 0.477287]$ & $7.31\times 10^{-10}$ & 363.07x & $7.3\times 10^{7}$ \\
+ & control & $0.477307$ & $[0.477073,\ 0.477542]$ & $1.43\times 10^{-8}$ & 18.54x & $3.7\times 10^{6}$ \\
+\addlinespace
+\bottomrule
+\end{tabular}
+\end{table}

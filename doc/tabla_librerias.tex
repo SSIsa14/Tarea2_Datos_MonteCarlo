@@ -4,13 +4,13 @@
 \caption{MT19937 propio frente a \texttt{random} y \texttt{secrets} ($N=\NMuestra$).}
 \label{tab:librerias}
 \small
-\begin{tabular}{lrrrrr}
+\begin{tabular}{l|r|r|r|r|r}
 \toprule
 Fuente & Valores/s & $X^2$ & $p_{\chi^2}$ & $D$ & $p_{KS}$ \\
 \midrule
-\texttt{MT19937 propio} & 459{,}593 & 11.71 & 0.2300 & 0.00381 & 0.1092 \\
-\texttt{random} & 15{,}382{,}116 & 11.71 & 0.2300 & 0.00381 & 0.1092 \\
-\texttt{secrets} & 1{,}174{,}510 & 9.34 & 0.4066 & 0.00205 & 0.7965 \\
+\texttt{MT19937 propio} & 553{,}228 & 11.71 & 0.2300 & 0.00381 & 0.1092 \\
+\texttt{random} & 19{,}129{,}094 & 11.71 & 0.2300 & 0.00381 & 0.1092 \\
+\texttt{secrets} & 1{,}340{,}812 & 10.95 & 0.2789 & 0.00348 & 0.1759 \\
 \bottomrule
 \end{tabular}
 \end{table}

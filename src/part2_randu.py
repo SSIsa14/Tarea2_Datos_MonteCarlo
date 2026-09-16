@@ -100,7 +100,7 @@ def escribir(resultados, cobertura):
          r"ternas consecutivas de cada generador. La ultima columna es la "
          r"fraccion de los $K=\KRandu$ intervalos que cubren el valor real.}",
          r"\label{tab:randu}", r"\small",
-         r"\begin{tabular}{llrlrrc}", r"\toprule",
+         r"\begin{tabular}{l|l|r|l|r|r|c}", r"\toprule",
          r"Region & Fuente & Estimacion & IC $95\%$ & Sesgo relativo & "
          r"$|z|$ & Cobertura \\", r"\midrule"]
     etiquetas = {"octante": r"Bola unitaria", "bola": f"Bola $r={RADIO}$"}

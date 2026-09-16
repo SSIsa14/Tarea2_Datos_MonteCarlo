@@ -265,14 +265,15 @@ def tabla_pruebas(nombre, sufijo, etiqueta, r):
          "uniformidad"),
         ("Autocorrelacion lag-1", f"{r['lag1']['stat']:+.5f}", r["lag1"]["p"],
          "independencia"),
-        ("Rachas", f"{r['rachas']['stat']}", r["rachas"]["p"], "independencia"),
+        ("Rachas", f"{r['rachas']['stat']:,}".replace(",", "{,}"),
+         r["rachas"]["p"], "independencia"),
     ]
     L = [r"\begin{table}[htbp]\centering",
          rf"\caption{{Pruebas de hipotesis para {etiqueta} sobre $N=\NMuestra$ "
          r"valores. Se rechaza $H_0$ al $5\%$ si $p<0.05$.}",
          rf"\label{{tab:pruebas{sufijo}}}",
          r"\small",
-         r"\begin{tabular}{llrrl}", r"\toprule",
+         r"\begin{tabular}{l|l|r|r|l}", r"\toprule",
          r"Prueba & Mide & Estadistico & $p$-valor & Decision \\", r"\midrule"]
     for prueba, stat, p, mide in filas:
         L.append(f"{prueba} & {mide} & {stat} & {fmt_p(p)} & "
@@ -286,7 +287,7 @@ def tabla_velocidad(vel):
          r"\caption{Velocidad medida en Python puro, 50\,000 valores por "
          r"generador.}",
          r"\label{tab:velocidad}",
-         r"\begin{tabular}{lrr}", r"\toprule",
+         r"\begin{tabular}{l|r|r}", r"\toprule",
          r"Generador & Valores por segundo & Costo relativo \\", r"\midrule"]
     mejor = max(vel.values())
     for nombre, _, _, etiqueta, _ in GENERADORES:
@@ -301,7 +302,7 @@ def tabla_librerias(filas):
          r"\caption{MT19937 propio frente a \texttt{random} y \texttt{secrets} "
          r"($N=\NMuestra$).}",
          r"\label{tab:librerias}", r"\small",
-         r"\begin{tabular}{lrrrrr}", r"\toprule",
+         r"\begin{tabular}{l|r|r|r|r|r}", r"\toprule",
          r"Fuente & Valores/s & $X^2$ & $p_{\chi^2}$ & $D$ & $p_{KS}$ \\",
          r"\midrule"]
     for f in filas:
@@ -373,9 +374,7 @@ def main():
         print(f"    rachas {r['rachas']['stat']:12}  p={r['rachas']['p']:.3e}")
 
     print("\nPrueba espectral...")
-    for nombre in ("LCG", "MersenneTwister", "RANDU"):
-        etiqueta = next(e for n, _, _, e, _ in GENERADORES if n == nombre)
-        semilla = next(s for n, _, s, _, _ in GENERADORES if n == nombre)
+    for nombre, _, semilla, etiqueta, _ in GENERADORES:
         cubo_ternas(nombre, muestras[nombre], etiqueta, semilla)
     planos, residuo = planos_randu(muestras["RANDU"])
     print(f"  RANDU: {planos} planos, residuo maximo {residuo:.1e}")

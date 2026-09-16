@@ -9,6 +9,9 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{array}
+% Columna de ancho fijo sin justificar, para que no queden huecos entre palabras
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \usepackage[margin=2.4cm]{geometry}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
@@ -16,6 +19,16 @@
 \usepackage{caption}
 \usepackage{parskip}
 \setlength{\parskip}{0.75em plus 0.2em minus 0.1em}
+
+% Los subtitulos de nivel paragraph van numerados y con el texto debajo,
+% no corrido en la misma linea.
+\setcounter{secnumdepth}{4}
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {2.6ex \@plus 1ex \@minus .2ex}%
+  {1.1ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
 \usepackage[hidelinks]{hyperref}
 
 \graphicspath{{../figs/}{figs/}{./}}
@@ -59,7 +72,7 @@
 \newcommand{\ficha}[6]{%
 \begin{table}[htbp]\centering\small
 \caption{#2}\label{#1}
-\begin{tabular}{@{}p{2.4cm}p{12.4cm}@{}}
+\begin{tabular}{@{}L{2.4cm}|L{12.2cm}@{}}
 \toprule
 Velocidad    & #3 \\ \addlinespace
 Período      & #4 \\ \addlinespace
@@ -150,6 +163,33 @@ Todas las figuras y tablas de la Parte 1 salen de una sola ejecución de
 
 % ===========================================================================
 \newpage
+\section{Apoyo de inteligencia artificial}
+
+Para la elaboración de este trabajo se contó con el apoyo de una herramienta
+de inteligencia artificial. El proceso fue el siguiente.
+
+Primero se hizo una investigación personal sobre cada uno de los temas y
+sobre lo que pedía el enunciado. Las fuentes encontradas se le compartieron a
+la herramienta para que le sirvieran de base, y se le pidió además que
+ampliara la búsqueda en los puntos donde hiciera falta.
+
+Para el código se le entregaron las semillas específicas que debían usarse,
+junto con las opciones disponibles, y ejemplos de código genérico de cómo se
+resuelve cada una de las secciones. Sobre esa base se le pidió apoyo para
+generar las implementaciones correspondientes.
+
+Los resultados obtenidos se analizaron de forma personal, y esos análisis se
+le entregaron en borrador para que ayudara a mejorar la redacción antes de
+incorporarlos al documento.
+
+Después se le pidió ayuda con el código del documento en \LaTeX, tomando en
+cuenta todo lo que se había compartido previamente.
+
+Por último se hizo una revisión del documento completo para mejorar su
+estructura, la redacción de algunas partes y las conclusiones.
+
+% ===========================================================================
+\newpage
 \section{Parte 1: Generadores de números pseudoaleatorios}
 
 Los cinco algoritmos están implementados en \code{src/prngs.py} sin usar
@@ -169,7 +209,7 @@ pruebas miden uniformidad y dos miden independencia serial. En las cuatro,
 $H_0$ es ``la muestra se comporta como \emph{i.i.d.} $\mathrm{Unif}(0,1)$'' y
 se rechaza al $5\%$ cuando $p < 0.05$.
 
-\paragraph{Chi-cuadrado.} Se parte $[0,1)$ en $k=10$ celdas de igual ancho.
+\subsubsection{Chi-cuadrado} Se parte $[0,1)$ en $k=10$ celdas de igual ancho.
 Bajo $H_0$ cada celda espera $E = N/k$ observaciones y
 \begin{equation}
 X^2 = \sum_{j=1}^{k} \frac{(O_j - E)^2}{E}
@@ -178,7 +218,7 @@ X^2 = \sum_{j=1}^{k} \frac{(O_j - E)^2}{E}
 con $k-1$ grados de libertad porque no se estima ningún parámetro a partir de
 los datos: la hipótesis nula ya fija las probabilidades de celda en $1/k$.
 
-\paragraph{Kolmogorov--Smirnov.} Compara la función de distribución empírica
+\subsubsection{Kolmogorov--Smirnov} Compara la función de distribución empírica
 contra la teórica midiendo su máxima separación vertical,
 $D = \sup_x |F_N(x) - x|$. Sobre la muestra ordenada
 $u_{(1)} \le \dots \le u_{(N)}$ esto se calcula como
@@ -192,12 +232,12 @@ $Q(\lambda) = 2\sum_{k\ge1} (-1)^{k-1} e^{-2k^2\lambda^2}$. A diferencia de
 $\chi^2$, KS no necesita agrupar en celdas, así que detecta desviaciones
 locales que una celda ancha podría promediar.
 
-\paragraph{Autocorrelación de retardo 1.} Es la primera prueba de
+\subsubsection{Autocorrelación de retardo 1} Es la primera prueba de
 independencia: contrasta $H_0: \rho_1 = 0$ con el coeficiente muestral $r_1$
 entre $u_i$ y $u_{i+1}$. Bajo $H_0$ y para $N$ grande,
 $\sqrt{N}\,r_1 \xrightarrow{d} \mathcal{N}(0,1)$.
 
-\paragraph{Prueba de rachas.} Codifica cada valor como ``arriba'' o ``abajo''
+\subsubsection{Prueba de rachas} Codifica cada valor como ``arriba'' o ``abajo''
 de la mediana y cuenta cuántos bloques consecutivos del mismo signo hay. Con
 $n_1$ valores arriba y $n_2$ abajo,
 \begin{equation}
@@ -229,7 +269,7 @@ enteros con $0 \le X_0, a, c < m$. Cuando $c \neq 0$ se le llama
 \emph{mixto}; cuando $c = 0$, \emph{multiplicativo} (ese es el caso de RANDU,
 sección~\ref{sec:randu}).
 
-\paragraph{Forma cerrada.} La recurrencia lineal se puede resolver
+\paragraph{Forma cerrada} La recurrencia lineal se puede resolver
 explícitamente. Aplicándola dos veces,
 $X_2 = a(aX_0+c)+c = a^2X_0 + c(a+1)$, y por inducción
 \begin{equation}
@@ -241,7 +281,7 @@ donde el cociente se interpreta módulo $m$. La consecuencia práctica es que
 un LCG no tiene memoria: cualquier salida futura queda determinada por
 $X_0$ y por tres constantes.
 
-\paragraph{Periodicidad.} El estado vive en $\{0,1,\dots,m-1\}$, que es
+\paragraph{Periodicidad} El estado vive en $\{0,1,\dots,m-1\}$, que es
 finito, así que por el principio del palomar entre $X_0, X_1, \dots, X_m$ hay
 dos iguales. En cuanto $X_i = X_j$ con $i<j$, la sucesión se repite con
 período $j-i$, y por lo tanto el período nunca puede exceder $m$. Además, si
@@ -249,7 +289,7 @@ $\mcd(a,m)=1$ el mapa $X \mapsto aX+c$ es una biyección módulo $m$, de modo
 que la sucesión es \emph{puramente} periódica: no tiene una cola inicial que
 no se vuelva a visitar.
 
-\paragraph{Teorema de Hull--Dobell.} El período es exactamente $m$ para toda
+\paragraph{Teorema de Hull--Dobell} El período es exactamente $m$ para toda
 semilla si y sólo si se cumplen estas tres condiciones:
 \begin{enumerate}[label=(\roman*), itemsep=1pt]
   \item $\mcd(c, m) = 1$;
@@ -268,7 +308,7 @@ primo de $m$ es $2$ y $a-1 = 1664524$ es par; y
 $1664524 = 4 \cdot 416131$ es divisible entre $4$. El período es entonces
 exactamente $2^{32} \approx 4.29\times 10^9$.
 
-\paragraph{Estructura reticular.} El defecto estructural de todo LCG es que
+\paragraph{Estructura reticular} El defecto estructural de todo LCG es que
 sus $d$-tuplas consecutivas no llenan el cubo $[0,1)^d$, sino que caen en una
 retícula. El teorema de Marsaglia acota el número de hiperplanos paralelos
 que las contienen por
@@ -283,7 +323,7 @@ uno no los distingue; uno mal parametrizado se queda muy por debajo y ahí sí
 se ve el desastre. Ésa es toda la diferencia entre este generador y RANDU,
 que se queda en apenas \PlanosRandu{} planos.
 
-\paragraph{Los bits bajos son un problema aparte.} Con $m = 2^{32}$ hay otro
+\paragraph{Comportamiento de los bits bajos} Con $m = 2^{32}$ hay otro
 defecto que conviene conocer: el bit $j$-ésimo menos significativo de $X_n$
 tiene período $2^{j+1}$. O sea, el último bit alterna con período 2, el
 siguiente con período 4, y así. Entonces, si uno quiere un entero chico, no
@@ -355,7 +395,7 @@ $[0,1]^3$ (\NTernas{} ternas).}
 \end{figure}
 
 En la figura~\ref{fig:cuboLCG} la nube llena el cubo y no se le ve ninguna
-estructura. Ojo con la interpretación: eso no quiere decir que la retícula no
+estructura. Es importante no malinterpretarlo: eso no quiere decir que la retícula no
 exista. Por la cota~\eqref{eq:marsaglia} sabemos que los planos están ahí,
 pero al ser del orden de miles quedan separados por distancias de $10^{-3}$,
 mucho más finas de lo que se puede distinguir en una figura con \NTernas{}
@@ -380,7 +420,7 @@ X_{n+1} = \left\lfloor \frac{X_n^2}{10^{k/2}} \right\rfloor \bmod 10^{k},
 La idea intuitiva es que los dígitos del centro de un cuadrado dependen de
 todos los dígitos del original, así que ``mezclan'' bien.
 
-\paragraph{Por qué aquí no hay ninguna garantía de período.} La diferencia de
+\paragraph{Razón de la falta de garantía de período} La diferencia de
 fondo con el LCG es que el mapa~\eqref{eq:ms} \textbf{no es una biyección}.
 Varios estados distintos pueden terminar con los mismos dígitos centrales, y
 en cuanto eso pasa la órbita se va encogiendo. Un mapa cualquiera sobre un
@@ -392,14 +432,14 @@ $\mathcal{O}(10^{k/2})$ en vez del $10^k$ que uno esperaría viendo el tamaño
 del espacio de estados. Se pierde la mitad de los dígitos de período nada más
 por la forma que tiene el mapa.
 
-\paragraph{Y encima el cero se traga todo.} Hay un modo de falla todavía
+\paragraph{El cero como estado absorbente} Hay un modo de falla todavía
 peor. Si en algún paso los dígitos centrales salen todos cero, entonces
 $X_n = 0$, y como $0^2 = 0$ el generador se queda en cero para siempre. Es un
 punto fijo sin salida: el generador no se vuelve periódico, se muere. Y hay
 trampas parecidas, como los ciclos cortos de longitud 100 que aparecieron
 probando otras semillas.
 
-\paragraph{Lo que pasó con nuestra semilla.} Con $k = 8$ dígitos y semilla
+\paragraph{Comportamiento con la semilla usada} Con $k = 8$ dígitos y semilla
 \Semilla, la sucesión cae en el punto fijo $X = 0$ en el paso
 $i = \CMColapso$, y el ciclo que queda tiene longitud \CMCiclo. Como la
 muestra que pide la tarea es de $N = \NMuestra$ valores, resulta que el
@@ -482,6 +522,19 @@ sobre el método de von Neumann no es que produzca números mal distribuidos,
 sino que produce pocos. Mientras dura se ve bastante decente; el problema es
 que se acaba.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.46\textwidth]{cubo_MiddleSquare.png}
+\caption{Ternas consecutivas $(u_i, u_{i+1}, u_{i+2})$ del método de
+cuadrados medios en el cubo $[0,1]^3$.}
+\label{fig:cuboCM}
+\end{figure}
+
+La figura~\ref{fig:cuboCM} muestra el efecto del colapso sobre las ternas.
+Como el \CMFracCeros{} de la muestra son ceros, casi todos los puntos se
+amontonan en el origen del cubo, y lo único que queda repartido es el rastro
+del tramo útil, es decir, los valores que alcanzó a producir antes de morir.
+
 % ---------------------------------------------------------------------------
 \subsection{Mersenne Twister (MT19937)}
 \label{sec:mt}
@@ -494,7 +547,7 @@ su teoría vive en el cuerpo $\mathbb{F}_2 = \{0,1\}$: cada palabra de $32$
 bits se ve como un vector de $\mathbb{F}_2^{32}$ y todas las operaciones
 (\textsc{xor}, desplazamientos, máscaras) son lineales sobre ese cuerpo.
 
-\paragraph{La recurrencia.} El estado son $n = 624$ palabras de $w = 32$
+\paragraph{La recurrencia} El estado son $n = 624$ palabras de $w = 32$
 bits. La recurrencia combina dos palabras separadas por $m = 397$ posiciones:
 \begin{equation}
 \mathbf{x}_{k+n} = \mathbf{x}_{k+m} \oplus
@@ -517,7 +570,7 @@ multiplicar matrices:
 El nombre ``torcido'' viene precisamente de esa matriz $A$, que es la
 torsión que rompe la simetría del retardo de Fibonacci.
 
-\paragraph{De dónde sale el período.} Toda la iteración es una aplicación
+\paragraph{Origen del período} Toda la iteración es una aplicación
 lineal $\mathbf{s} \mapsto B\mathbf{s}$ sobre el espacio de estados
 $\mathbb{F}_2^{nw - r}$, donde $r = 31$ son los bits que se descartan de la
 primera palabra. La dimensión efectiva es
@@ -532,7 +585,7 @@ factorización conocida de $2^{19937}-1$, que es un primo de Mersenne: de ahí
 el nombre del generador. Que el número sea primo ayuda, porque entonces
 cualquier estado no nulo tiene automáticamente período completo.
 
-\paragraph{Templado.} La salida cruda de la recurrencia no se entrega
+\paragraph{Templado} La salida cruda de la recurrencia no se entrega
 directamente. Pasa antes por un \emph{templado} (\emph{tempering}), que es
 otra transformación lineal invertible sobre $\mathbb{F}_2^{32}$:
 \begin{align}
@@ -544,7 +597,7 @@ y &\gets y \oplus (y \gg 18).
 El templado no cambia el período, porque es invertible; lo que hace es
 mejorar la equidistribución de los bits individuales.
 
-\paragraph{Equidistribución.} Ésta es la propiedad que de verdad importa y
+\paragraph{Equidistribución} Ésta es la propiedad que de verdad importa y
 que separa a MT19937 de todo lo anterior. El generador es
 \emph{equidistribuido a 32 bits de precisión en 623 dimensiones}: si se toman
 las $623$-tuplas consecutivas de salidas y se miran sus $32$ bits, cada
@@ -553,7 +606,7 @@ patrón posible aparece el mismo número de veces en un período completo
 dimensión 3 aquí no aparece hasta después de la dimensión 623. Por eso pasa
 la prueba espectral en las dimensiones donde RANDU se hunde.
 
-\paragraph{Lo que no es.} Con todo lo bueno que tiene, MT19937 no sirve para
+\paragraph{Ausencia de seguridad criptográfica} Con todo lo bueno que tiene, MT19937 no sirve para
 criptografía. Como toda la recurrencia es lineal, a alguien le basta con ver
 624 salidas seguidas para invertir el templado, reconstruir el estado
 completo y predecir todo lo que viene después. Es rapidísimo y
@@ -632,7 +685,7 @@ son sospechosamente altos, porque eso también sería mala señal; un $p$ casi
 igual a 1 significaría que los datos se ajustan \emph{demasiado} bien a la
 uniforme, que es lo que pasa cuando alguien los acomodó.
 
-\paragraph{Validación de la implementación.} Una implementación propia de
+\paragraph{Validación de la implementación} Una implementación propia de
 MT19937 se puede verificar de manera mucho más fuerte que con pruebas
 estadísticas, porque el algoritmo es determinista y está publicado:
 \begin{enumerate}[itemsep=2pt]
@@ -656,7 +709,7 @@ estadísticas, porque el algoritmo es determinista y está publicado:
 La nube de ternas de la figura~\ref{fig:cuboMT} no muestra estructura, y en
 este caso sabemos que no la hay hasta dimensión 623, no sólo que no se ve.
 
-\paragraph{Comparación con \code{random} y \code{secrets}.} El generador
+\paragraph{Comparación con \code{random} y \code{secrets}} El generador
 elegido para el inciso (d) es este mismo. Las tres fuentes comparadas son:
 \begin{itemize}[itemsep=2pt]
   \item la implementación propia de MT19937;
@@ -713,7 +766,7 @@ x_{n+1} = x_n^2 \bmod N,
 extrayendo en cada paso los $j$ bits menos significativos de $x_n$, con
 $j = \lfloor \log_2 \log_2 N \rfloor$.
 
-\paragraph{Por qué los primos tienen que ser congruentes con 3 módulo 4.}
+\paragraph{Razón de la condición sobre los primos}
 Sea $QR_N$ el conjunto de residuos
 cuadráticos módulo $N$. Cuando $p \equiv 3 \pmod 4$, exactamente una de las
 dos raíces cuadradas de un residuo cuadrático módulo $p$ es a su vez un
@@ -723,7 +776,7 @@ condición sobre $q$, el mapa $x \mapsto x^2$ resulta ser una
 ciclo puro, sin cola: no hay estados que se visiten una sola vez y el
 generador nunca se degrada como los cuadrados medios.
 
-\paragraph{Seguridad.} Predecir el siguiente bit de salida con ventaja no
+\paragraph{Seguridad} Predecir el siguiente bit de salida con ventaja no
 despreciable sobre el volado es tan difícil como decidir residuosidad
 cuadrática módulo $N$, problema que se cree tan difícil como factorizar $N$.
 Ésta es la diferencia cualitativa con todos los generadores anteriores: la
@@ -732,10 +785,12 @@ $j = \lfloor \log_2\log_2 N\rfloor$ bits por paso, y no más, es parte del
 teorema: es la cantidad de bits que se puede extraer sin debilitar la
 reducción.
 
-\paragraph{Un error que valió la pena cometer.} Aquí hay algo que al
-principio parecía un bug del código y terminó siendo teoría: la condición
-$p \equiv q \equiv 3 \pmod 4$ es necesaria pero \textbf{no suficiente} para
-tener buen período. El período de la órbita de~\eqref{eq:bbs} es
+\paragraph{Hallazgo sobre la elección de los primos}
+Al implementar el generador apareció un resultado que no estaba previsto en
+el planteamiento y que vale la pena documentar, porque cambia la manera de
+elegir los parámetros: la condición $p \equiv q \equiv 3 \pmod 4$ es
+necesaria pero \textbf{no suficiente} para tener buen período. El período de
+la órbita de~\eqref{eq:bbs} es
 \begin{equation}
 \ord_{\lambda(\lambda(N))}(2),
 \end{equation}
@@ -744,18 +799,20 @@ es la función de Carmichael. La razón es que
 $x_n = x_0^{2^n} \bmod N$, de modo que el exponente $2^n$ vive módulo
 $\lambda(N)$ y el período se reduce a preguntar cuándo $2^n$ se repite ahí.
 
-En el primer intento usé los primos de Mersenne $p = 2^{31}-1$ y
-$q = 2^{61}-1$, que sí cumplen lo de $3 \bmod 4$ y además son famosos, así
-que parecían una buena idea. El generador colapsó a un ciclo de unos 30
-estados: de los 64 valores posibles de un bloque de 6 bits sólo aparecían 44,
-y las pruebas de uniformidad rechazaban $H_0$ por goleada. La causa es que
-$p-1$ y $q-1$ se factorizan en primos chiquitos, entonces
-$\lambda(\lambda(N))$ queda pequeño y el orden de 2 también. Ser primo no
-alcanza: importa cómo se factoriza el número de al lado.
+La primera elección de parámetros fueron los primos de Mersenne
+$p = 2^{31}-1$ y $q = 2^{61}-1$, que cumplen la condición y son los
+candidatos más naturales por lo conocidos que son. Con ellos el generador
+recorrió un ciclo de apenas unos 30 estados: de los 64 valores posibles de un
+bloque de 6 bits sólo llegaron a aparecer 44, y las cuatro pruebas rechazaron
+$H_0$ de forma contundente. Al contrastar ese comportamiento contra la
+teoría quedó clara la causa: $p-1$ y $q-1$ se factorizan en primos pequeños,
+de modo que $\lambda(\lambda(N))$ resulta pequeño y con él el orden de 2. Ser
+primo no alcanza; lo que determina el período es cómo se factoriza el número
+anterior.
 
-La solución es exigir \emph{primos seguros}, es decir $p = 2p'+1$ con $p'$
-también primo, lo que obliga a $\lambda(N)$ a tener un factor primo grande.
-La implementación final usa
+El ajuste que resuelve el problema es exigir \emph{primos seguros}, es decir
+$p = 2p'+1$ con $p'$ también primo, lo que obliga a $\lambda(N)$ a tener un
+factor primo grande. La implementación final usa
 \[
 p = 4294967387 = 2 \cdot 2147483693 + 1, \qquad
 q = 8589935363 = 2 \cdot 4294967681 + 1,
@@ -827,6 +884,21 @@ primos de Mersenne del primer intento, rechazaban $H_0$ en las cuatro
 pruebas. El código era idéntico, lo único que cambió fueron dos constantes.
 En criptografía los parámetros no son configuración, son parte del algoritmo.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.46\textwidth]{cubo_BlumBlumShub.png}
+\caption{Ternas consecutivas $(u_i, u_{i+1}, u_{i+2})$ de Blum Blum Shub en
+el cubo $[0,1]^3$.}
+\label{fig:cuboBBS}
+\end{figure}
+
+En la figura~\ref{fig:cuboBBS} las ternas llenan el cubo sin ninguna
+estructura visible. A diferencia de los generadores congruenciales, aquí no
+hay una recurrencia lineal entre términos consecutivos que pueda confinarlas
+a una retícula: el siguiente estado sale de un cuadrado modular, y
+recuperarlo a partir de las salidas equivale al problema de la residuosidad
+cuadrática.
+
 % ---------------------------------------------------------------------------
 \subsection{RANDU}
 \label{sec:randu}
@@ -844,14 +916,14 @@ La elección parece razonable a primera vista: $a = 65539 = 2^{16}+3$ permite
 calcular la multiplicación con un desplazamiento y dos sumas, que en hardware
 de los años 60 era una ventaja real.
 
-\paragraph{Período.} Como $c = 0$, no aplica Hull--Dobell. Para un generador
+\paragraph{Período} Como $c = 0$, no aplica Hull--Dobell. Para un generador
 multiplicativo con $m = 2^{31}$, el estado nunca puede ser par si la semilla
 es impar (multiplicar impares da impar), así que la órbita vive en un
 subconjunto. El período máximo posible es $m/4 = 2^{29}$ y RANDU lo alcanza.
 Ya de entrada es un período cuatro veces menor que el de un LCG mixto con el
 mismo módulo, pero ése no es el problema serio.
 
-\paragraph{El defecto fatal.} El problema es algebraico y exacto. Escribiendo
+\paragraph{Origen del defecto} El problema es algebraico y exacto. Escribiendo
 $a = 65539 = 2^{16}+3$:
 \begin{align}
 a^2 &= (2^{16}+3)^2 = 2^{32} + 6\cdot 2^{16} + 9 \nonumber\\
@@ -872,7 +944,7 @@ anteriores. Dividiendo entre $2^{31}$, las ternas normalizadas satisfacen
 \label{eq:randuplanos}
 \end{equation}
 
-\paragraph{Cuántos planos.} La ecuación~\eqref{eq:randuplanos} dice que toda
+\paragraph{Número de planos} La ecuación~\eqref{eq:randuplanos} dice que toda
 terna consecutiva cae en alguno de los planos paralelos de vector normal
 $(9,-6,1)$. Como cada $u \in [0,1)$, la combinación $9u_n - 6u_{n+1}+u_{n+2}$
 está acotada entre $-6$ y $10$, y sólo puede tomar los valores enteros en ese
@@ -992,7 +1064,7 @@ generador.
 (tabla~\ref{tab:velocidad}).}
 \label{tab:comparativa}
 \scriptsize
-\begin{tabular}{p{2.1cm}p{2.5cm}p{2.9cm}p{2.7cm}p{3.6cm}}
+\begin{tabular}{L{2.1cm}|L{2.4cm}|L{2.8cm}|L{2.6cm}|L{3.4cm}}
 \toprule
 Algoritmo & Velocidad & Período & Seguridad & Casos de uso \\
 \midrule
@@ -1031,7 +1103,7 @@ Ninguno. Contraejemplo canónico \\
 
 \input{tabla_velocidad}
 
-Ojo con lo que mide la tabla~\ref{tab:velocidad}: es el costo en Python
+Es importante precisar qué mide la tabla~\ref{tab:velocidad}: es el costo en Python
 interpretado, no la velocidad intrínseca de cada algoritmo. El orden relativo
 sí dice algo, porque refleja cuántas operaciones aritméticas necesita cada
 generador para entregar un valor. RANDU y el LCG son los más baratos con una
@@ -1137,7 +1209,7 @@ para duplicarla hay que cuadruplicarlo. Es una tasa francamente lenta, sobre
 todo comparada con una regla de Simpson en una dimensión, que converge como
 $N^{-4}$.
 
-\paragraph{Por qué la tasa no depende de la dimensión.} Repitamos el
+\paragraph{Independencia de la tasa respecto a la dimensión} Repitamos el
 argumento en un dominio $D \subset \mathbb{R}^d$ de volumen finito $|D|$. Con
 $\mathbf{U}$ uniforme en $D$ se tiene $I = |D|\,\mathbb{E}[f(\mathbf{U})]$
 por el mismo cálculo de arriba, y el estimador
@@ -1215,7 +1287,7 @@ con $N = \NFinal$ muestras y tres fuentes de aleatoriedad: el módulo
 
 \input{tabla_integrales}
 
-\paragraph{Lectura de los resultados.} Las seis estimaciones quedan a menos
+\subsubsection{Lectura de los resultados} Las seis estimaciones quedan a menos
 de $10^{-3}$ del valor exacto, con errores del orden de $10^{-4}$, que es
 exactamente lo que predice la ecuación~\eqref{eq:tasa}: con $N = \NFinal$ y
 $\sigma \approx 0.3$ el error estándar esperado anda por $3\times10^{-4}$.
@@ -1243,7 +1315,7 @@ referencia $N^{-1/2}$.}
 
 \input{tabla_pendientes}
 
-\paragraph{Estudio de convergencia.} La figura~\ref{fig:convergencia} barre
+\subsubsection{Estudio de convergencia} La figura~\ref{fig:convergencia} barre
 $N$ desde $10$ hasta $10^{6}$. Una sola corrida sale utilísima para nada,
 porque el error salta muchísimo de un $N$ al siguiente, así que cada punto de
 la gráfica es el error cuadrático medio sobre \Repeticiones{} corridas
@@ -1260,7 +1332,7 @@ incertidumbre relativa cercana al $20\%$, que es lo que se ve como temblor en
 la parte izquierda de la gráfica, donde $N$ es chico. Ninguna de las tres
 fuentes da señales de salirse de la tasa teórica.
 
-\paragraph{Comparación entre generadores.} Este resultado hay que subrayarlo
+\subsubsection{Comparación entre generadores} Este resultado hay que subrayarlo
 porque a primera vista parece contradecir toda la Parte 1: para estas dos
 integrales, el LCG propio funciona igual de bien que \code{random}. ¿Y
 entonces para qué tanto escándalo con la calidad de los generadores?
@@ -1311,7 +1383,7 @@ en escala logarítmica.}
 \label{fig:fraccion}
 \end{figure}
 
-\paragraph{Lo que está pasando geométricamente.} La
+\subsubsection{Interpretación geométrica} La
 figura~\ref{fig:fraccion} explica el porqué de todo esto. La razón $V_d/2^d$
 se desploma de manera superexponencial: vale $2.49\times 10^{-3}$ en $d=10$ y
 \FraccionVeinte{} en $d=20$. En veinte dimensiones la bola inscrita ocupa
@@ -1341,7 +1413,7 @@ $1/\sqrt{p}$. La dimensión no ataca al exponente, le pega a la constante.
 
 \input{tabla_rejilla}
 
-\paragraph{Comparación contra la rejilla.} Con el mismo presupuesto de
+\subsubsection{Comparación contra la rejilla} Con el mismo presupuesto de
 \Presupuesto{} puntos, la cuadratura determinista evalúa el integrando en el
 centro de cada celda de una rejilla de $m$ subdivisiones por eje, con
 $m = \lfloor \Presupuesto^{1/d}\rfloor$. En $d=2$ la rejilla gana, como era
@@ -1488,7 +1560,7 @@ acomodado nada:
         $1/(1-\rho^2) \approx 18.8$ coincide con lo medido.
 \end{itemize}
 
-\paragraph{Qué significa eso en muestras.} Un factor de reducción $F$ quiere
+\paragraph{Equivalencia en número de muestras} Un factor de reducción $F$ quiere
 decir que la técnica llega, con $N$ evaluaciones, a la misma precisión que
 Monte Carlo simple alcanzaría con $F\cdot N$. Ése es el speedup efectivo y
 aparece en la última columna de la tabla~\ref{tab:varianza}, expresado
@@ -1498,7 +1570,7 @@ muestras pediría alrededor de $6\times10^{7}$ muestras simples. Ahí está el
 argumento económico de toda la sección: media hora pensando en un buen
 control vale más que dejar la computadora corriendo toda la noche.
 
-\paragraph{¿Entonces siempre conviene usarlas?} No, y cada técnica falla por
+\paragraph{Alcance y límites de cada técnica} No, y cada técnica falla por
 un motivo distinto. Las antitéticas dependen del \emph{signo} de $\rho$:
 ayudan con integrandos monótonos y estorban con integrandos simétricos, que
 es exactamente lo que se vio arriba. Las variables de control dependen de la
@@ -1539,7 +1611,7 @@ sobre \KRandu{} semillas distintas.}
 \label{fig:randumc}
 \end{figure}
 
-\paragraph{Lo que pasó con la región grande.} Con el octante de la bola
+\subsubsection{Resultado con la región grande} Con el octante de la bola
 unitaria, RANDU y el Mersenne Twister dan prácticamente lo mismo:
 $\EstRanduOctante$ contra $\EstMTOctante$, los dos a menos de dos errores
 estándar del valor exacto y los dos con intervalos que lo cubren. En el panel
@@ -1548,7 +1620,7 @@ pegaditas a la referencia $N^{-1/2}$. Si el análisis se hubiera quedado aquí,
 la conclusión habría sido que RANDU funciona sin problema, que es justo lo
 que le pasó a mucha gente en los años 60.
 
-\paragraph{Lo que pasó con la región pequeña.} Con la bola de radio
+\subsubsection{Resultado con la región pequeña} Con la bola de radio
 $r = \RadioBola$ la historia cambia por completo. RANDU estima
 $\EstRanduBola$ cuando el valor real es $\ExactoBola$: un sesgo relativo de
 \RelativoRanduBola, o sea que se equivoca por una cuarta parte del valor. Su
@@ -1570,12 +1642,17 @@ La diferencia importa: el ruido se arregla con más muestras y el sesgo no.
 RANDU no está convergiendo despacio hacia el valor correcto, está
 convergiendo muy bien hacia un valor equivocado.
 
-\paragraph{Por qué pasa esto, geométricamente.} La respuesta es la
-figura~\ref{fig:planos} de la Parte 1, ni más ni menos. Las ternas de RANDU
-no viven en el cubo, viven en \PlanosRandu{} planos paralelos de normal
-$(9,-6,1)$. Entonces el estimador de Monte Carlo no está midiendo el volumen
-de la región: está midiendo qué fracción de \emph{esos planos} cae dentro de
-la región, que es otra cosa.
+\subsubsection{Explicación geométrica del sesgo} La respuesta está en las dos
+gráficas de ternas en 3D de la Parte 1. En la figura~\ref{fig:cuboRANDU}, que
+es la nube vista desde un ángulo cualquiera, los puntos parecen llenar el
+cubo $[0,1]^3$ sin ninguna estructura. En la figura~\ref{fig:planos}, que es
+la misma nube girada hasta mirar en la dirección del vector normal
+$(9,-6,1)$, se ve lo que realmente pasa: las ternas de RANDU no viven en el
+cubo, viven en \PlanosRandu{} planos paralelos. Y es exactamente de esas
+ternas de donde salen los puntos $(x,y,z)$ que usa el estimador de esta
+sección. Entonces el estimador de Monte Carlo no está midiendo el volumen de
+la región: está midiendo qué fracción de \emph{esos planos} cae dentro de la
+región, que es otra cosa.
 
 Cuando la región es grande, como el octante de la bola, la cruzan varios
 planos y los errores de unos y otros se compensan al promediar, así que el
@@ -1587,7 +1664,7 @@ aparente, y por eso el resultado sale \RelativoRanduBola{} arriba. La
 convergencia es real, pero converge a la medida de la intersección de los
 planos con la bola, que no es el número que se quería calcular.
 
-\paragraph{Y los intervalos de confianza también se descomponen.} La última
+\subsubsection{Efecto sobre los intervalos de confianza} La última
 columna de la tabla~\ref{tab:randu} repite cada estimación con \KRandu{}
 semillas distintas y cuenta cuántos de esos intervalos del $95\%$ contienen
 al valor real. Con el octante los dos generadores se portan bien
@@ -1598,7 +1675,7 @@ de todo el experimento: con RANDU los intervalos dejan de
 significar lo que dicen significar. Están reportando una precisión que el
 estimador no tiene, y quien lea el resultado no tiene forma de enterarse.
 
-\paragraph{Cómo se conecta todo esto con la Parte 1.} Con esto se cierra el
+\subsubsection{Conexión con la prueba espectral de la Parte 1} Con esto se cierra el
 círculo que quedó abierto en la sección~\ref{sec:randu}. Las cuatro pruebas
 de hipótesis miraban un valor o una pareja a la vez, y por eso le dieron el
 visto bueno a RANDU. La prueba espectral, que sí mira ternas, lo reprobó de

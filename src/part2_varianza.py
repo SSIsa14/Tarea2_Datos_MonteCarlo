@@ -115,7 +115,7 @@ def escribir(filas, correlaciones):
          r"contra Monte Carlo simple, y el speedup efectivo es el numero de "
          r"muestras simples que harian falta para igualar esa precision.}",
          r"\label{tab:varianza}", r"\footnotesize",
-         r"\begin{tabular}{llrlrrr}", r"\toprule",
+         r"\begin{tabular}{l|l|r|l|r|r|r}", r"\toprule",
          r"Integral & Tecnica & Estimacion & IC $95\%$ & Varianza & Factor & "
          r"Speedup \\", r"\midrule"]
     for f in filas:

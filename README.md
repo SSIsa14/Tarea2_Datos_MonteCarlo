@@ -177,6 +177,11 @@ Dos restricciones que vale la pena conocer: RANDU necesita semilla impar
 (141903 lo es) y Blum Blum Shub necesita una semilla coprima con su módulo.
 Si se cambian por otras que no cumplan, el constructor avisa con un error.
 
+Todos los resultados estadísticos (estadísticos, p-valores, estimaciones e
+intervalos) salen idénticos en cada corrida. Lo único que cambia de una
+ejecución a otra son los tiempos de las tablas de velocidad, porque dependen
+de la máquina y de qué tan cargada esté en ese momento.
+
 ---
 
 ## 5. Si algo falla

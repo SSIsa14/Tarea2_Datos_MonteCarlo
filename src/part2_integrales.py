@@ -125,7 +125,7 @@ def escribir(filas, pendientes):
          r"\caption{Estimaciones con $N=\NFinal$ muestras e intervalo de "
          r"confianza del $95\%$.}",
          r"\label{tab:integrales}", r"\small",
-         r"\begin{tabular}{llrlrc}", r"\toprule",
+         r"\begin{tabular}{l|l|r|l|r|c}", r"\toprule",
          r"Integral & Fuente & Estimacion & IC $95\%$ & Error & Cubre \\",
          r"\midrule"]
     for r in filas:
@@ -141,7 +141,7 @@ def escribir(filas, pendientes):
          r"\caption{Pendiente ajustada al error RMS en escala log--log. "
          r"El valor teorico es $-0.5$.}",
          r"\label{tab:pendientes}",
-         r"\begin{tabular}{lrr}", r"\toprule",
+         r"\begin{tabular}{l|r|r}", r"\toprule",
          r"Fuente & Integral (a) & Integral (b) \\", r"\midrule"]
     for nombre in NOMBRES_FUENTE:
         L.append(f"\\texttt{{{nombre}}} & {pendientes[(nombre, 'seno')]:.3f} & "

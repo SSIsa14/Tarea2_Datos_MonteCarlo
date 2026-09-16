@@ -110,7 +110,7 @@ def escribir(mc, rej, fracciones):
          r"\caption{Volumen de la bola unitaria estimado con $N=\NDim$ puntos "
          r"uniformes en $[-1,1]^d$.}",
          r"\label{tab:volumenes}", r"\small",
-         r"\begin{tabular}{rrrrll}", r"\toprule",
+         r"\begin{tabular}{r|r|r|r|l|l}", r"\toprule",
          r"$d$ & $V_d$ exacto & Aciertos & Estimacion & IC $95\%$ & Error \\",
          r"\midrule"]
     for r in mc:
@@ -126,7 +126,7 @@ def escribir(mc, rej, fracciones):
          r"presupuesto de puntos, y puntos que exigiria una rejilla de $m=10$ "
          r"subdivisiones por eje.}",
          r"\label{tab:rejilla}", r"\small",
-         r"\begin{tabular}{rrrrrr}", r"\toprule",
+         r"\begin{tabular}{r|r|r|r|r|r}", r"\toprule",
          r"$d$ & $m$ posible & Puntos usados & Error rejilla & Error MC & "
          r"Puntos si $m=10$ \\", r"\midrule"]
     for r, q in zip(rej, mc):

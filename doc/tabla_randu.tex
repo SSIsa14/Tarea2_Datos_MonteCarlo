@@ -1,0 +1,19 @@
+% Generado por los scripts de src/.
+% No editar a mano: se sobrescribe en cada ejecucion.
+\begin{table}[htbp]\centering
+\caption{Dos estimaciones en tres dimensiones con $N=\NRandu$ ternas consecutivas de cada generador. La ultima columna es la fraccion de los $K=\KRandu$ intervalos que cubren el valor real.}
+\label{tab:randu}
+\small
+\begin{tabular}{llrlrrc}
+\toprule
+Region & Fuente & Estimacion & IC $95\%$ & Sesgo relativo & $|z|$ & Cobertura \\
+\midrule
+Bola unitaria & RANDU & $0.523444$ & $[0.522752,\ 0.524137]$ & $-0.03\%$ & $0.4$ & 96\% \\
+Bola unitaria & Mersenne Twister & $0.524037$ & $[0.523345,\ 0.524729]$ & $+0.08\%$ & $1.2$ & 97\% \\
+\addlinespace
+Bola $r=0.1$ & RANDU & $0.000654$ & $[0.000619,\ 0.000689]$ & $+24.90\%$ & $7.2$ & 87\% \\
+Bola $r=0.1$ & Mersenne Twister & $0.000532$ & $[0.000500,\ 0.000564]$ & $+1.60\%$ & $0.5$ & 93\% \\
+\addlinespace
+\bottomrule
+\end{tabular}
+\end{table}

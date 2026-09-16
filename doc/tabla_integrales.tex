@@ -1,0 +1,19 @@
+% Generado por los scripts de src/.
+% No editar a mano: se sobrescribe en cada ejecucion.
+\begin{table}[htbp]\centering
+\caption{Estimaciones con $N=\NFinal$ muestras e intervalo de confianza del $95\%$.}
+\label{tab:integrales}
+\small
+\begin{tabular}{llrlrc}
+\toprule
+Integral & Fuente & Estimacion & IC $95\%$ & Error & Cubre \\
+\midrule
+(a) seno & \texttt{random} & $0.636804$ & $[0.636201,\ 0.637408]$ & $1.8\times 10^{-4}$ & si \\
+(a) seno & \texttt{LCG} & $0.636428$ & $[0.635825,\ 0.637032]$ & $1.9\times 10^{-4}$ & si \\
+(a) seno & \texttt{MT19937} & $0.637334$ & $[0.636731,\ 0.637937]$ & $7.1\times 10^{-4}$ & no \\
+(b) normal & \texttt{random} & $0.477583$ & $[0.477132,\ 0.478035]$ & $3.3\times 10^{-4}$ & si \\
+(b) normal & \texttt{LCG} & $0.477697$ & $[0.477245,\ 0.478148]$ & $4.5\times 10^{-4}$ & si \\
+(b) normal & \texttt{MT19937} & $0.477344$ & $[0.476893,\ 0.477795]$ & $9.4\times 10^{-5}$ & si \\
+\bottomrule
+\end{tabular}
+\end{table}

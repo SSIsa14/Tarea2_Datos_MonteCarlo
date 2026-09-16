@@ -15,7 +15,9 @@ Abajo está el procedimiento completo.
 
 ## 1. Requisitos
 
-- **Python 3.10 o superior.** Verificar con:
+- **Python 3.12**, que es la versión con la que se probó todo. El código no
+  usa sintaxis reciente, así que también debería correr en versiones
+  anteriores. Verificar con:
 
   ```bash
   python3 --version
@@ -27,6 +29,9 @@ Abajo está el procedimiento completo.
   ```bash
   pip install numpy matplotlib
   ```
+
+  Se probó con numpy 1.26 y 2.5, y con matplotlib 3.10 y 3.11: los resultados
+  salen idénticos con ambas versiones.
 
 - **Una distribución de LaTeX**, para compilar el PDF. Cualquiera de estas
   tres opciones sirve:
@@ -41,6 +46,10 @@ Abajo está el procedimiento completo.
 
   La opción 3 es subir la carpeta `doc/` junto con `figs/` a Overleaf y
   compilar ahí, sin instalar nada.
+
+  El PDF de este repositorio se compiló con la opción 2. Ese comando deja el
+  binario `tectonic` en la carpeta donde se ejecuta, así que conviene correrlo
+  en un directorio que esté en el `PATH`.
 
 ---
 
@@ -138,7 +147,10 @@ Con una instalación normal de LaTeX, el equivalente es correr `pdflatex
 tarea2.tex` **dos veces** (la primera pasada arma el índice y la segunda lo
 coloca bien).
 
-El resultado es `doc/tarea2.pdf`, de 35 páginas.
+El resultado es `doc/tarea2.pdf`, de 39 páginas.
+
+Los pasos 1 al 7 se probaron completos desde un entorno virtual limpio, con
+únicamente numpy y matplotlib instalados.
 
 ---
 
